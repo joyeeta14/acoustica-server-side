@@ -12,6 +12,8 @@ app.use(express.json());
 
 
 const { MongoClient, ServerApiVersion } = require('mongodb');
+
+
 const uri = `mongodb+srv://${process.env.DB_user}:${process.env.DB_password}@cluster0.aibkcfj.mongodb.net/?retryWrites=true&w=majority`;
 
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
@@ -23,24 +25,41 @@ const client = new MongoClient(uri, {
   }
 });
 
+const classCollection = client.db("acousticaDB");
+const classInfo = classCollection.collection("classInfo");
+
+
+
+
 async function run() {
   try {
     // Connect the client to the server	(optional starting in v4.7)
-    await client.connect();
-    // Send a ping to confirm a successful connection
-    await client.db("admin").command({ ping: 1 });
+    client.connect(error => {
+      if(error){
+        console.log(error);
+        return;
+      }
+    })
+
+    app.post('/addClasses',async(req, res)=>{
+      const doc=req.body;
+      const result = await classInfo.insertOne(doc);
+      res.send(result);
+    })
+
     console.log("Pinged your deployment. You successfully connected to MongoDB!");
   } finally {
     // Ensures that the client will close when you finish/error
     // await client.close();
   }
 }
+
 run().catch(console.log);
 
 
 
 app.get('/', (req,res)=>{
-    res.send("Sitting on a high speed voltage");
+  res.send("Sitting on a high speed voltage");
 })
 app.listen(port, ()=>{
     console.log(`running ${port}`);
