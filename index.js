@@ -40,12 +40,29 @@ async function run() {
         return;
       }
     })
+    
 
+    app.get('/addClasses',async(req,res)=>{
+      const cursor = classInfo.find();
+      const result = await cursor.toArray();
+      res.send(result);
+    })
+
+    app.get('/addClasses/:email',async(req, res)=>{
+        const email = req.params.email;
+        const query = { instructorEmail: email };
+        const result = await classInfo.findOne(query);
+        res.send(result);
+     })
     app.post('/addClasses',async(req, res)=>{
       const doc=req.body;
       const result = await classInfo.insertOne(doc);
       res.send(result);
     })
+
+
+
+
 
     console.log("Pinged your deployment. You successfully connected to MongoDB!");
   } finally {
