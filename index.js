@@ -50,11 +50,11 @@ async function run() {
       res.send(result);
     })
     
-    // app.get('/addClasses',async(req,res)=>{
-    //   const cursor = classInfo.find();
-    //   const result = await cursor.toArray();
-    //   res.send(result);
-    // })
+    app.get('/addClasses',async(req,res)=>{
+      const cursor = classInfo.find();
+      const result = await cursor.toArray();
+      res.send(result);
+    })
 
     // app.get('/addClasses/:email',async(req, res)=>{
     //     const email = req.params.email;
