@@ -68,6 +68,11 @@ async function run() {
         const result = await classInfo.find(query).toArray();
         res.send(result);
      })
+    app.get('/instructors',async(req, res)=>{
+      const query = { role: "instructor" };
+        const result = await userInfo.find(query).toArray();
+        res.send(result);
+     })
 
     app.get('/addClasses/:id',async(req, res)=>{
         const id = req.params.id;
