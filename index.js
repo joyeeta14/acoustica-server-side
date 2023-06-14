@@ -44,11 +44,11 @@ async function run() {
     
 
     
-    app.get('/users',async(req,res)=>{
-      const cursor = userInfo.find();
-      const result = await cursor.toArray();
-      res.send(result);
-    })
+    // app.get('/users',async(req,res)=>{
+    //   const cursor = userInfo.find();
+    //   const result = await cursor.toArray();
+    //   res.send(result);
+    // })
     
     app.get('/addClasses',async(req,res)=>{
       const cursor = classInfo.find();
@@ -81,16 +81,16 @@ async function run() {
         res.send(result);
      })
     app.post('/addClasses',async(req, res)=>{
-      const doc=req.body;
-      const result = await classInfo.insertOne(doc);
+      const file = req.body;
+      const result = await classInfo.insertOne(file);
       res.send(result);
     })
 
-    app.post('/users',async(req, res)=>{
-      const user=req.body;
-      const result = await userInfo.insertOne(user);
-      console.log(result);
-    })
+    // app.post('/users',async(req, res)=>{
+    //   const user=req.body;
+    //   const result = await userInfo.insertOne(user);
+    //   console.log(result);
+    // })
 
 
 
