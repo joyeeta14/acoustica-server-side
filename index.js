@@ -44,11 +44,11 @@ async function run() {
     
 
     
-    // app.get('/users',async(req,res)=>{
-    //   const cursor = userInfo.find();
-    //   const result = await cursor.toArray();
-    //   res.send(result);
-    // })
+    app.get('/users',async(req,res)=>{
+      const cursor = userInfo.find();
+      const result = await cursor.toArray();
+      res.send(result);
+    })
     
     app.get('/addClasses',async(req,res)=>{
       const cursor = classInfo.find();
