@@ -11,7 +11,7 @@ app.use(express.json());
 
 
 
-const { MongoClient, ServerApiVersion } = require('mongodb');
+const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 
 
 const uri = `mongodb+srv://${process.env.DB_user}:${process.env.DB_password}@cluster0.aibkcfj.mongodb.net/?retryWrites=true&w=majority`;
@@ -27,7 +27,8 @@ const client = new MongoClient(uri, {
 
 const classCollection = client.db("acousticaDB");
 const classInfo = classCollection.collection("classInfo");
-
+const userCollection = client.db("acousticaDB");
+const userInfo = userCollection.collection("userInfo");
 
 
 
@@ -42,23 +43,44 @@ async function run() {
     })
     
 
-    app.get('/addClasses',async(req,res)=>{
-      const cursor = classInfo.find();
+    
+    app.get('/users',async(req,res)=>{
+      const cursor = userInfo.find();
       const result = await cursor.toArray();
       res.send(result);
     })
+    
+    // app.get('/addClasses',async(req,res)=>{
+    //   const cursor = classInfo.find();
+    //   const result = await cursor.toArray();
+    //   res.send(result);
+    // })
 
-    app.get('/addClasses/:email',async(req, res)=>{
-        const email = req.params.email;
-        const query = { instructorEmail: email };
-        const result = await classInfo.findOne(query);
-        res.send(result);
-     })
+    // app.get('/addClasses/:email',async(req, res)=>{
+    //     const email = req.params.email;
+    //     const query = { instructorEmail: email };
+    //     const result = await classInfo.findOne(query);
+    //     res.send(result);
+    //  })
+    // app.get('/addClasses/:id',async(req, res)=>{
+    //     const id = req.params.id;
+    //     const query = { _id: new ObjectId(id) };
+    //     const result = await classInfo.findOne(query);
+    //     res.send(result);
+    //  })
     app.post('/addClasses',async(req, res)=>{
       const doc=req.body;
       const result = await classInfo.insertOne(doc);
       res.send(result);
     })
+
+    app.post('/users',async(req, res)=>{
+      const user=req.body;
+      const result = await userInfo.insertOne(user);
+      console.log(result);
+    })
+
+
 
 
 
