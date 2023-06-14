@@ -62,6 +62,13 @@ async function run() {
         const result = await classInfo.findOne(query);
         res.send(result);
      })
+
+    app.get('/approvedClasses',async(req, res)=>{
+      const query = { status: "approved" };
+        const result = await classInfo.find(query).toArray();
+        res.send(result);
+     })
+
     app.get('/addClasses/:id',async(req, res)=>{
         const id = req.params.id;
         const query = { _id: new ObjectId(id) };
