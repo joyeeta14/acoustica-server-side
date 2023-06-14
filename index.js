@@ -56,18 +56,18 @@ async function run() {
       res.send(result);
     })
 
-    // app.get('/addClasses/:email',async(req, res)=>{
-    //     const email = req.params.email;
-    //     const query = { instructorEmail: email };
-    //     const result = await classInfo.findOne(query);
-    //     res.send(result);
-    //  })
-    // app.get('/addClasses/:id',async(req, res)=>{
-    //     const id = req.params.id;
-    //     const query = { _id: new ObjectId(id) };
-    //     const result = await classInfo.findOne(query);
-    //     res.send(result);
-    //  })
+    app.get('/addClasses/:email',async(req, res)=>{
+        const email = req.params.email;
+        const query = { instructorEmail: email };
+        const result = await classInfo.findOne(query);
+        res.send(result);
+     })
+    app.get('/addClasses/:id',async(req, res)=>{
+        const id = req.params.id;
+        const query = { _id: new ObjectId(id) };
+        const result = await classInfo.findOne(query);
+        res.send(result);
+     })
     app.post('/addClasses',async(req, res)=>{
       const doc=req.body;
       const result = await classInfo.insertOne(doc);
