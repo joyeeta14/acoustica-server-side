@@ -86,11 +86,11 @@ async function run() {
       res.send(result);
     })
 
-    // app.post('/users',async(req, res)=>{
-    //   const user=req.body;
-    //   const result = await userInfo.insertOne(user);
-    //   console.log(result);
-    // })
+    app.post('/users',async(req, res)=>{
+      const user=req.body;
+      const result = await userInfo.insertOne(user);
+      console.log(result);
+    })
 
 
 
